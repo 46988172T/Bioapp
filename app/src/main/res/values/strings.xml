@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Bioapp</string>
+    <string name="facebook_app_id">201549890211879</string>
+    <string name="title_activity_logout">Logout</string>
 </resources>
