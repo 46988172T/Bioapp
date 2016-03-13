@@ -4,4 +4,11 @@
     <string name="title_activity_logout">Logout</string>
     <string name="title_activity_mapbox">MapboxActivity</string>
     <string name="accessToken">pk.eyJ1IjoibGVvc3NzIiwiYSI6ImNpbDE1ejlnbzAwOW53MW00cDhuZnZpNmoifQ.AZeOgG-6oR8zDNeOKDzXXA</string>
+    <string name="title_activity_main">Bioapp</string>
+
+    <string name="navigation_drawer_open">Abrir menú</string>
+    <string name="navigation_drawer_close">Cerrar menú</string>
+
+    <string name="action_settings">Opciones</string>
+    <string name="title_activity_add_info">Añadir dato interesante</string>
 </resources>

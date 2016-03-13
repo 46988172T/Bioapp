@@ -52,12 +52,13 @@ public class Login extends Activity {
     private LoginButton loginButton;
     private TextView btnLogin;
     private ProgressDialog progressDialog;
-    User user;
+    public User user;
     private int contador = 0; //para firebase
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         Firebase.setAndroidContext(this);
         setContentView(R.layout.activity_login);
 
@@ -86,7 +87,7 @@ public class Login extends Activity {
 
         if(PrefUtils.getCurrentUser(Login.this) != null){
 
-            Intent homeIntent = new Intent(Login.this, MapboxActivity.class);
+            Intent homeIntent = new Intent(Login.this, MainActivity.class);
 
             startActivity(homeIntent);
 
@@ -207,7 +208,7 @@ public class Login extends Activity {
                                 }
 
                                 Toast.makeText(Login.this,"Bienvenido "+user.name,Toast.LENGTH_LONG).show();
-                                Intent intent=new Intent(Login.this, MapboxActivity.class);
+                                Intent intent=new Intent(Login.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();
 

@@ -36,9 +36,18 @@
             android:name=".FacebookLogout"
             android:label="@string/title_activity_logout" />
         <activity
-            android:name=".MapboxActivity"
-            android:label="@string/title_activity_mapbox"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AddInfo"
+            android:label="@string/title_activity_add_info"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.goleogo.bioapp.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
