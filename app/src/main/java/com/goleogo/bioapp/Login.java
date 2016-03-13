@@ -59,8 +59,6 @@ public class Login extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
-        MultiDex.install(this);
-        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
 
 
@@ -88,7 +86,7 @@ public class Login extends Activity {
 
         if(PrefUtils.getCurrentUser(Login.this) != null){
 
-            Intent homeIntent = new Intent(Login.this, FacebookLogout.class);
+            Intent homeIntent = new Intent(Login.this, MapboxActivity.class);
 
             startActivity(homeIntent);
 
@@ -209,7 +207,7 @@ public class Login extends Activity {
                                 }
 
                                 Toast.makeText(Login.this,"Bienvenido "+user.name,Toast.LENGTH_LONG).show();
-                                Intent intent=new Intent(Login.this, FacebookLogout.class);
+                                Intent intent=new Intent(Login.this, MapboxActivity.class);
                                 startActivity(intent);
                                 finish();
 

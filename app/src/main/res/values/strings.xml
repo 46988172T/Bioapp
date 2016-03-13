@@ -2,4 +2,6 @@
     <string name="app_name">Bioapp</string>
     <string name="facebook_app_id">201549890211879</string>
     <string name="title_activity_logout">Logout</string>
+    <string name="title_activity_mapbox">MapboxActivity</string>
+    <string name="accessToken">pk.eyJ1IjoibGVvc3NzIiwiYSI6ImNpbDE1ejlnbzAwOW53MW00cDhuZnZpNmoifQ.AZeOgG-6oR8zDNeOKDzXXA</string>
 </resources>
