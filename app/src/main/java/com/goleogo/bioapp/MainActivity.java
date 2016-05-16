@@ -65,8 +65,6 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 Snackbar.make(view, "Hacia tu posición", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                /*Intent i = new Intent(getBaseContext(), AddInfo.class);
-                startActivity(i);*/
                 myPosition();
             }
         });
