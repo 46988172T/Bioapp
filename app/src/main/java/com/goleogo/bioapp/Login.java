@@ -52,7 +52,8 @@ public class Login extends Activity {
     private LoginButton loginButton;
     private TextView btnLogin;
     private ProgressDialog progressDialog;
-    public User user;
+    public static User user;
+    public static String user_firebase_key;
     private int contador = 0; //para firebase
 
     @Override
@@ -84,9 +85,10 @@ public class Login extends Activity {
 
         // hasta aqui debug keyhash
 
-
+        //esto comprueba si estamos logueados y si es asi lanza el mainActivity
         if(PrefUtils.getCurrentUser(Login.this) != null){
-
+            user = PrefUtils.getCurrentUser(Login.this); //esto guarda en user el los datos del usuario.
+            getFirebaseKey(user);
             Intent homeIntent = new Intent(Login.this, MainActivity.class);
 
             startActivity(homeIntent);
@@ -98,7 +100,6 @@ public class Login extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-
 
         callbackManager=CallbackManager.Factory.create();
 
@@ -184,6 +185,8 @@ public class Login extends Activity {
 
                                             if (userSnapshot.getFacebookID().equals(user.getFacebookID())) {
                                                 //si existe ya el usuario en Firebase, el contador se pone a cero y sale.
+                                                System.out.println("YYYYYYYYYYYYYYYYYYYEAHHHHHHHHH----->"+postSnapshot.getKey());
+                                                user_firebase_key = postSnapshot.getKey();
                                                 contador = 0;
                                                 break;
                                             } else if (!userSnapshot.getFacebookID().equals(user.getFacebookID())) {
@@ -315,6 +318,32 @@ public class Login extends Activity {
              * lo ponga a cero antes de salir del bucle, y no guardamos nada.
              */
         }
+    }
+
+    public static void getFirebaseKey(User user){
+
+        final User user_for_key = user;
+
+        Firebase ref = new Firebase("https://bioappleo.firebaseio.com/users/user/");
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    User userSnapshot = postSnapshot.getValue(User.class);
+
+                    if (userSnapshot.getFacebookID().equals(user_for_key.getFacebookID())) {
+                        System.out.println("YYYYYYYYYYYYYYYYYYYEAHHHHHHHHH222222222222222222222----->" + postSnapshot.getKey());
+                        user_firebase_key = postSnapshot.getKey();
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
     }
 
 }

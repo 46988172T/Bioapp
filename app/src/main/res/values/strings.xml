@@ -11,4 +11,12 @@
 
     <string name="action_settings">Opciones</string>
     <string name="title_activity_add_info">Añadir dato interesante</string>
+
+    <string name="video">Vídeo</string>
+    <string name="photo">Foto</string>
+    <string name="text">Texto</string>
+    <string name="audio">Audio</string>
+    <string name="title_activity_maps">Map</string>
+
+
 </resources>

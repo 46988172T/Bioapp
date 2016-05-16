@@ -14,6 +14,8 @@ public class User {
 
     public String pictureUrl;
 
+
+
     public User() {
     }
 
