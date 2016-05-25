@@ -52,10 +52,10 @@ public class MainActivity extends AppCompatActivity
     double latitude, longitude;
     Marker marker;
 
-    Icon iconAudio;
-    Icon iconText;
-    Icon iconVideo;
-    Icon iconPhoto;
+    public static Icon iconAudio;
+    public static Icon iconText;
+    public static Icon iconVideo;
+    public static Icon iconPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

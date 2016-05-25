@@ -1,11 +1,13 @@
 package com.goleogo.bioapp;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -27,6 +29,11 @@ public class ListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        final Drawable foto = getResources().getDrawable( R.drawable.photo );
+        final Drawable audio = getResources().getDrawable( R.drawable.audio );
+        final Drawable texto = getResources().getDrawable( R.drawable.text );
+        final Drawable video = getResources().getDrawable( R.drawable.video );
+
         listView = (ListView) findViewById(R.id.listViewNotes);
         Firebase.setAndroidContext(this);
 
@@ -39,9 +46,18 @@ public class ListActivity extends AppCompatActivity {
 
                 TextView titulo = (TextView) v.findViewById(R.id.tituloText);
                 TextView descripcion = (TextView) v.findViewById(R.id.descripcionText);
-
+                ImageView tipo = (ImageView) v.findViewById(R.id.tipoNota);
                 titulo.setText(note.getTitle());
                 descripcion.setText(note.getDescription());
+                if(note.getType().equals("foto")){
+                    tipo.setImageDrawable(foto);
+                }else if(note.getType().equals("audio")){
+                    tipo.setImageDrawable(audio);
+                }else if(note.getType().equals("texto")){
+                    tipo.setImageDrawable(texto);
+                }else if(note.getType().equals("video")){
+                    tipo.setImageDrawable(video);
+                }
             }
         };
 
