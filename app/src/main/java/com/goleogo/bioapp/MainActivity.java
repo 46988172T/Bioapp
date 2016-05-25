@@ -3,6 +3,7 @@ package com.goleogo.bioapp;
 import android.location.Criteria;
 import android.location.LocationListener;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.PopupMenu.OnMenuItemClickListener;
 import android.content.Context;
@@ -32,12 +33,15 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
+import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.views.MapView;
+
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity
@@ -46,6 +50,7 @@ public class MainActivity extends AppCompatActivity
     static MapView mapView = null;
     public static Location location;
     double latitude, longitude;
+    Marker marker;
 
     Icon iconAudio;
     Icon iconText;
@@ -180,12 +185,9 @@ public class MainActivity extends AppCompatActivity
             startActivity(i);
         } else if (id == R.id.social) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
+        } else if (id == R.id.lista) {
+            Intent i = new Intent(getBaseContext(), ListActivity.class);
+            startActivity(i);
         } else if (id == R.id.salir) {
             Intent i = new Intent(getBaseContext(), FacebookLogout.class);
             startActivity(i);
@@ -252,8 +254,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void myPosition() {
-        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Location location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 20, this);
+        Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         longitude = location.getLongitude();
         latitude = location.getLatitude();
 
@@ -278,9 +281,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onLocationChanged(Location location) {
         // TODO Auto-generated method stub
-
-        latitude = (int) (location.getLatitude());
-        longitude = (int) (location.getLongitude());
+        this.location = location;
 
         Log.i("Geo_Location", "Latitude: " + latitude + ", Longitude: " + longitude);
     }

@@ -1,9 +1,11 @@
 package com.goleogo.bioapp;
 
+import java.io.Serializable;
+
 /**
  * Created by leosss on 29/03/16.
  */
-public class Note {
+public class Note implements Serializable{
     private String title;
     private String description;
     private String filepathS3;
@@ -13,8 +15,7 @@ public class Note {
     private String type;
     private String user_firebase_key;
 
-    public Note(){
-
+    public Note() {
     }
 
     public String getDescription() {

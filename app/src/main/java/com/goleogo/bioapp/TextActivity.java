@@ -34,6 +34,7 @@ public class TextActivity extends AppCompatActivity {
                     Note note = new Note();
                     note.setTitle(title.getText().toString());
                     note.setLatitude(MainActivity.location.getLatitude());
+                    note.setFilepathS3("");
                     note.setLongitude(MainActivity.location.getLongitude());
                     note.setDescription(description.getText().toString());
                     note.setId_user(Login.user.getFacebookID());
