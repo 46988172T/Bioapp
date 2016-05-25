@@ -32,7 +32,7 @@ public class PhotoActivity extends AppCompatActivity {
     ImageView thumb;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_TAKE_PHOTO = 1;
-    String mCurrentPhotoPath;
+    String path;
     boolean foto = false;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -72,7 +72,7 @@ public class PhotoActivity extends AppCompatActivity {
                     note.setLatitude(MainActivity.location.getLatitude());
                     note.setLongitude(MainActivity.location.getLongitude());
                     note.setDescription(description.getText().toString());
-                    note.setFilepathS3(mCurrentPhotoPath);
+                    note.setFilepathS3(path);
                     note.setId_user(Login.user.getFacebookID());
                     note.setUser_firebase_key(Login.user_firebase_key);
                     note.setType("foto");
@@ -93,9 +93,7 @@ public class PhotoActivity extends AppCompatActivity {
 
         });
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
     }
 
     public void openCamera() {
@@ -111,7 +109,7 @@ public class PhotoActivity extends AppCompatActivity {
             } catch (IOException ex) {
 
             }
-
+            //si se ha creado, lo guardamos.
             if (photoFile != null) {
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
                         Uri.fromFile(photoFile));
@@ -120,66 +118,27 @@ public class PhotoActivity extends AppCompatActivity {
         }
     }
 
+    //crea la imagen indicando el directorio, si es la primera foto, lo crea.
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "BIOAPP_" + timeStamp + "_";
 
         File storageDir = new File("/storage/emulated/0/bioapp/media/images/"); //creamos una carpeta independiente
-        if (storageDir.exists()){
+        if (storageDir.exists()){ //si existe, nada.
 
-        }else if (!storageDir.exists()){
+        }else if (!storageDir.exists()){ //si no, lo creamos.
             storageDir.mkdirs();
         }
         File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
+                imageFileName,  /* nombre de la imagen */
+                ".jpg",         /* formato */
+                storageDir      /* directorio */
         );
 
-        // Save a file: path for use with ACTION_VIEW intents
-        mCurrentPhotoPath = image.getAbsolutePath();
+        // pasamos el path para guardarlo.
+        path = image.getAbsolutePath();
         return image;
     }
 
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Photo Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.goleogo.bioapp/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Photo Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.goleogo.bioapp/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
-    }
 }

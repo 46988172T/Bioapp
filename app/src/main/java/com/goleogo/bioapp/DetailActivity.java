@@ -34,6 +34,7 @@ public class DetailActivity extends AppCompatActivity {
         titulo = (TextView) findViewById(R.id.titulo);
         imagen = (ImageView) findViewById(R.id.imagen);
         video = (VideoView) findViewById(R.id.video);
+
         descripcion = (TextView) findViewById(R.id.descripcion);
 
         nota = (Note) getIntent().getSerializableExtra("nota");
